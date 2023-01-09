@@ -111,6 +111,8 @@ in rec {
 
     , javaSources ? []
       # A list of additional Java source directories to include in the APK build
+    , mergeJavaSources ? (extra: default: extra ++ default )
+      # Function to merge the list of java source files. makes it possible to overwrite the original source files with a patched version.
 
     , universalApk ? true
       # Set this to false to build one APK per target platform.  This will
@@ -142,6 +144,7 @@ in rec {
               additionalDependencies
               runtimeSharedLibs
               javaSources
+              mergeJavaSources
               universalApk
               mavenDeps
               usesCleartextTraffic
